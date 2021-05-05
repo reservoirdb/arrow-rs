@@ -56,6 +56,18 @@ pub trait ArrowNativeType:
         None
     }
 
+    /// Convert native type to u64.
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        None
+    }
+
+    /// Convert native type to i64.
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        None
+    }
+
     /// Convert native type from i32.
     #[inline]
     fn from_i32(_: i32) -> Option<Self> {
@@ -118,6 +130,16 @@ impl ArrowNativeType for i8 {
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
     }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
+    }
 }
 
 impl JsonSerializable for i16 {
@@ -141,6 +163,16 @@ impl ArrowNativeType for i16 {
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
     }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
+    }
 }
 
 impl JsonSerializable for i32 {
@@ -163,6 +195,16 @@ impl ArrowNativeType for i32 {
     #[inline]
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
+    }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
     }
 
     /// Convert native type from i32.
@@ -194,6 +236,16 @@ impl ArrowNativeType for i64 {
         num::ToPrimitive::to_isize(self)
     }
 
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
+    }
+
     /// Convert native type from i64.
     #[inline]
     fn from_i64(val: i64) -> Option<Self> {
@@ -222,6 +274,16 @@ impl ArrowNativeType for u8 {
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
     }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
+    }
 }
 
 impl JsonSerializable for u16 {
@@ -244,6 +306,16 @@ impl ArrowNativeType for u16 {
     #[inline]
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
+    }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
     }
 }
 
@@ -268,6 +340,16 @@ impl ArrowNativeType for u32 {
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
     }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
+    }
 }
 
 impl JsonSerializable for u64 {
@@ -290,6 +372,16 @@ impl ArrowNativeType for u64 {
     #[inline]
     fn to_isize(&self) -> Option<isize> {
         num::ToPrimitive::to_isize(self)
+    }
+
+    #[inline]
+    fn to_u64(&self) -> Option<u64> {
+        num::ToPrimitive::to_u64(self)
+    }
+
+    #[inline]
+    fn to_i64(&self) -> Option<i64> {
+        num::ToPrimitive::to_i64(self)
     }
 }
 
