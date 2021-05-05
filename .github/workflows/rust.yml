@@ -119,7 +119,7 @@ jobs:
 
   # test the --features "simd" of the arrow crate. This requires nightly.
   linux-test-simd:
-    name: Test SIMD on AMD64 Rust ${{ matrix.rust }}
+    name: Test SIMD on ${{ matrix.arch }} Rust ${{ matrix.rust }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -363,7 +363,7 @@ jobs:
 
   # test the arrow crate builds against wasm32 in stable rust
   wasm32-build:
-    name: Build wasm32 on AMD64 Rust ${{ matrix.rust }}
+    name: Build wasm32 on ${{ matrix.arch }} Rust ${{ matrix.rust }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -407,7 +407,7 @@ jobs:
 
   # test the projects can build without default features
   default-build:
-    name: Check No Defaults on AMD64 Rust ${{ matrix.rust }}
+    name: Check No Defaults on ${{ matrix.arch }} Rust ${{ matrix.rust }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
