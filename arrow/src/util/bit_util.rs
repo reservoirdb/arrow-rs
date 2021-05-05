@@ -291,6 +291,11 @@ mod tests {
         assert_eq!(ceil(8, 8), 1);
         assert_eq!(ceil(9, 8), 2);
         assert_eq!(ceil(9, 9), 1);
+    }
+
+    #[test]
+    #[cfg(target_arch = "x86_64")]
+    fn test_ceil_x64_only() {
         assert_eq!(ceil(10000000000, 10), 1000000000);
         assert_eq!(ceil(10, 10000000000), 1);
         assert_eq!(ceil(10000000000, 1000000000), 10);
