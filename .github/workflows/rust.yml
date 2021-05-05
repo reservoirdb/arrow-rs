@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [amd64, i386]
+        arch: [amd64]
         rust: [stable]
     container:
       image: ${{ matrix.arch }}/rust
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [amd64, i386]
+        arch: [amd64]
         rust: [stable]
     container:
       image: ${{ matrix.arch }}/rust
@@ -169,6 +169,44 @@ jobs:
         rust: [stable]
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
+      # TODO: this won't cache anything, which is expensive. Setup this action
+      # with a OS-dependent path.
+      - name: Setup Rust toolchain
+        run: |
+          rustup toolchain install ${{ matrix.rust }}
+          rustup default ${{ matrix.rust }}
+          rustup component add rustfmt
+      - name: Run tests
+        shell: bash
+        run: |
+          export ARROW_TEST_DATA=$(pwd)/testing/data
+          export PARQUET_TEST_DATA=$(pwd)/parquet-testing/data
+          # do not produce debug symbols to keep memory usage down
+          export RUSTFLAGS="-C debuginfo=0"
+          cargo test
+
+  # this is a workaround for https://github.com/actions/checkout/issues/334
+  # we use a separate workflow for i386 Linux testing with checkout@v1
+  # once resolved, this should be moved to just another arch entry in the regular jobs
+  linux-test-32bit-workaround:
+    name: Test Workspace on ${{ matrix.arch }} Rust ${{ matrix.rust }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [i386]
+        rust: [stable]
+    container:
+      image: ${{ matrix.arch }}/rust
+      env:
+        # Disable full debug symbol generation to speed up CI build and keep memory down
+        # "1" means line tables only, which is useful for panic tracebacks.
+        RUSTFLAGS: "-C debuginfo=1"
+        ARROW_TEST_DATA: /__w/arrow-rs/arrow-rs/testing/data
+        PARQUET_TEST_DATA: /__w/arrow-rs/arrow-rs/parquet-testing/data
+    steps:
+      - uses: actions/checkout@v1
         with:
           submodules: true
       # TODO: this won't cache anything, which is expensive. Setup this action
